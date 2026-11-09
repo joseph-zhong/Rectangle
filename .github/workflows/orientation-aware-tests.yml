@@ -1,0 +1,19 @@
+name: Orientation-aware corner tests
+
+on: push
+
+permissions: read-all
+
+jobs:
+  test:
+    runs-on: xcode-27
+    steps:
+      - uses: actions/checkout@v4
+      - run: >-
+          xcodebuild test
+          -project Rectangle.xcodeproj
+          -scheme Rectangle
+          -destination 'platform=macOS'
+          CODE_SIGN_IDENTITY=-
+          -only-testing:RectangleTests/HalfSplitCornerCalculationTests
+          -only-testing:RectangleTests/CornerCycleExpansionModeTests
